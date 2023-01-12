@@ -9,7 +9,7 @@
 '   https://tools.ietf.org/html/rfc7158
 '
 '
-'
+'f
 Option Compare Binary
 Option Explicit
 
@@ -232,7 +232,7 @@ Private Function StringEncoder(ByVal s As String, js As String) As String
         "Syntax error. Empty string, at: " & p
     End If
 
-    s = s & Chr(&H22) 'Kezdõ idézõjel hozzáadása
+    s = s & Chr(&H22) ' Append starter (") sign
 
     Do
         p = p + 1
@@ -629,7 +629,7 @@ End Function
 
 Private Function tokenize(s)
     Dim pattern As String
-    
+
     pattern = """(([^""\\]|\\.)*)""|[+\-]?(?:0|[1-9]\d*)(?:\.\d*)?(?:[ee][+\-]?\d+)?|\w+|[^\s""']+?"
     tokenize = Rextract(s, pattern, True)
 End Function
@@ -684,9 +684,6 @@ Private Function Reset(jObj As Variant) As Variant
         End If
     Else
         If IsNumeric(jObj) Then
-            ' A kis számábrázolás miatt
-            ' minden számot Decimal-ra konvertál
-            '
             ' Integer:  2 bytes
             ' Long:     4 bytes
             ' Decimal:  12 bytes  <-
